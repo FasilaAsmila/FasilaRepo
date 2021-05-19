@@ -2,7 +2,8 @@ import './App.css'
 import Header from './components/Header';
 import {useState} from 'react'
 import Employee from './Employee';
-// import Counter1 from './counter1';
+import Counting from './Counting';
+import Counter1 from './counter1';
 
 function App() {
 
@@ -26,9 +27,18 @@ function App() {
     {name:'farida',age:22},
     {name:'farhana',age:15},
   ]
+
+  const [state, setState]=useState(false)
+
   return (
     <div>
-  <button onClick={addCount}>Add</button>
+{/* UseEffect */}
+      <h3 onClick={()=>setState(!state)}>Show/hide</h3>
+ { state ? <Counting /> : null }
+
+
+{/* Map */}
+  
   {
     emp.map((obj, index)=>
 
@@ -37,9 +47,10 @@ function App() {
   
     )
   }
-
-  {/* <Counter1 {...obj} />
-  <Counter1 title='2nd Counter' count={counter} /> */}
+{/* counter++ */}
+<button onClick={addCount}>Add</button>
+  <Counter1 {...obj} />
+  <Counter1 title='2nd Counter' count={counter} />
 
 
 <Header data={data}/>
