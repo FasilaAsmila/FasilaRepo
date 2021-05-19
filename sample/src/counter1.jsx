@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Counter1({title,count}) {
+function Counter1({title,...obj}) {
    
     return (
         <div>
-            <h2>{title} {count}</h2>
+            <h2>{title} {obj.count}{obj.place}</h2>
         </div>
     )
 }
