@@ -1,77 +1,71 @@
-import './App.css'
-import Header from './components/Header';
-import {useState} from 'react'
-import Employee from './Employee';
-import Counting from './Counting';
-import Counter1 from './counter1';
+import React from 'react';
+import './App.css';
+import{useState} from 'react'
 
 function App() {
-
-  const [counter, setCount]=useState(0)
-  const data = 'Asmila'
-//  let counter = 0;
-  const addCount =()=>{
-    setCount(counter+1)
-    console.log(counter);
-  }
-
-  let obj = {
-    title:'1st Counter',
-    count:counter,
-    place:'hello'
-  }
-
-  let emp =[
-    {name:'fasila',age:25},
-    {name:'asmila',age:21},
-    {name:'farida',age:22},
-    {name:'farhana',age:15},
-  ]
-
-  const [state, setState]=useState(false)
-
+  const [toDos,setToDos]=useState([])
+  const [toDo,setToDo]=useState('')
   return (
-    <div>
-{/* UseEffect */}
-      <h3 onClick={()=>setState(!state)}>Show/hide</h3>
- { state ? <Counting /> : null }
+    <div className="app">
+      <div className="mainHeading">
+        <h1>ToDo List</h1>
+      </div>
+      <div className="subHeading">
+        <br />
+        <h2>Whoop, it's Wednesday 🌝 ☕ </h2>
+      </div>
+      <div className="input">
+        <input value={toDo} onChange={(e)=>setToDo(e.target.value)} type="text" placeholder="🖊️ Add item..." />
+        <i onClick={()=>setToDos([...toDos,{id:Date.now(), text:toDo, status:false}])} className="fas fa-plus"></i>
+      </div>
+      <div className="todos">
 
+      {
+        toDos.map((obj)=>{
 
-{/* Map */}
+      return(
+        <div className="todo">
+
+          <div className="left">
+            <input 
+            onChange={
+              (e)=>{console.log(e.target.checked);
+              console.log(obj);
+              setToDos(toDos.filter(
+                obj2=>{
+                  if(obj2.id===obj.id){
+                    obj2.status=e.target.checked
+
+                  }
+                  return obj2
+                }
+              ))
+              }
+              
+            }
+            value={obj.status} type="checkbox" name="" id="" />
+            <p>{obj.text}</p>
+          </div>
+          <div className="right">
+            <i className="fas fa-times"></i>
+          </div>
+        </div>
+          )
+          })
+        }
+
+        {
+          toDos.map((obj)=>{
+            if(obj.status){
+              return(<h1>{obj.text}</h1>)
+            }
+            return null
+          })
+        }
   
-  {
-    emp.map((obj, index)=>
-
-
-  <Employee key={index} {...obj} />
-  
-    )
-  }
-{/* counter++ */}
-<button onClick={addCount}>Add</button>
-  <Counter1 {...obj} />
-  <Counter1 title='2nd Counter' count={counter} />
-
-
-<Header data={data}/>
-
-  
-
-
-    <p style={{color:'red'}}>Fasila {data} </p>
-    
-    {/* <Hello   />
-    <Hello/>
-    <Hello/>
-     */}
-
+      </div>
     </div>
-    
   );
 }
-function Hello(){
-  return(
-    <h1 className='Hello'>hello fasila</h1>
-  )
-}
+
 export default App;
