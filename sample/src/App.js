@@ -1,13 +1,13 @@
 import './App.css'
 import Header from './components/Header';
 import {useState} from 'react'
+import Counter1 from './counter1';
 
 function App() {
 
   const [counter, setCount]=useState(0)
   const data = 'Asmila'
-
-  // let counter = 0;
+//  let counter = 0;
   const addCount =()=>{
     setCount(counter+1)
     console.log(counter);
@@ -15,7 +15,9 @@ function App() {
   return (
     <div>
   <button onClick={addCount}>Add</button>
-<h2>Counter: {counter}</h2>
+  <Counter1 title='1st' count={counter} />
+  <Counter1 title='2nd' count={counter} />
+
 
 <Header data={data}/>
 
